@@ -1,25 +1,25 @@
 const usermodel = require("../model/user.js");
+const { CreatetheJwttokens } = require("../middlewares/authentication.js");
 
 const signupthefunction = async (req, res) => {
   const { name, password } = req.body;
 
-  if (name == "" || password == "")
+  if (name == "" && password == "")
     return res
-      .status(200)
-      .json({ messege: "please fill the name and password " });
+      .status(404)
+      .json({ messege: "please enter the full name and password" });
 
-  const newuser = new usermodel({ name: name, password: password });
-
+  let createnew = new usermodel({ name: name, password: password });
   try {
-    let response = await newuser.save();
-    return res
+    let reponse = await createnew.save();
+    let token = CreatetheJwttokens({ name: name, password: password });
+    res
       .status(200)
-      .json({ messege: "You Sucessfully sign in", response });
-  } catch (errors) {
-    return res.status(400).json({ messege: "something Went Wrong" });
+      .json({ messege: "sucessfully log in", token: token, reponse });
+  } catch (error) {
+    console.log(error);
   }
 };
-
 const loginthefunction = async (req, res) => {
   const { name, password } = req.body;
 
@@ -29,12 +29,11 @@ const loginthefunction = async (req, res) => {
       .json({ messege: "please put your valid name and password" });
 
   try {
-    let response = await usermodel.findOne({ name, password }); // Find by both name and password
-    if (response) {
-      return res.status(200).json({ messege: "successfully login", response });
-    } else {
-      return res.status(404).json({ messege: "login failed" });
-    }
+    let response = await usermodel.findOne({ name, password });
+    let token = CreatetheJwttokens({ name: name, password: password });
+    return res
+      .status(200)
+      .json({ messege: "successfully login", response, token: token });
   } catch (errors) {
     return res.status(500).json({ messege: "Internal server error", errors });
   }

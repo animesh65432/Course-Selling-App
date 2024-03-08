@@ -26,6 +26,7 @@ const createthecourse = async (req, res) => {
 const Getthecourse = async (req, res) => {
   try {
     const courses = await coursemodel.find({});
+    console.log(courses);
     return res.status(200).json({ success: true, data: courses });
   } catch (error) {
     return res.status(400).json({

@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { Router } = require("./Router/User.js");
+const Router = require("./Router/User.js");
 const database = require("./database/db.js");
 const CourseRouter = require("./Router/Course.js");
 
