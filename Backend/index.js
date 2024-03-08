@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const Router = require("./Router/User.js");
 const database = require("./database/db.js");
 const CourseRouter = require("./Router/Course.js");
 
 app.use(express.json());
-
+app.use(express.urlencoded());
+app.use(cors());
 app.use("/User", Router);
 app.use("/Course", CourseRouter);
 
