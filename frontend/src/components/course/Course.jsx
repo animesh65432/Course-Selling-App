@@ -4,7 +4,7 @@ const Course = () => {
   return (
     <>
       <div>
-        <p>Welcome to the Course</p>
+        <p>Hello it's the Course</p>
       </div>
     </>
   );
