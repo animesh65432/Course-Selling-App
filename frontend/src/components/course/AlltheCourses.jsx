@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+
 import {
   Container,
   Typography,
@@ -8,6 +9,7 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Button,
 } from "@mui/material";
 
 const AlltheCourses = () => {
@@ -31,7 +33,23 @@ const AlltheCourses = () => {
     fetchCourses();
   }, []);
 
-  console.log(courses);
+  const OndeleteCourse = async (id) => {
+    console.log(id);
+    try {
+      let response = await axios.delete(
+        `http://localhost:3000/Course/Delete?_id=${id}`,
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
+      const flterarray = courses.filter((obj) => obj._id != id);
+      setCourses(flterarray);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (courses.length === 0) {
     return (
@@ -69,6 +87,13 @@ const AlltheCourses = () => {
                   Price: {course.price}
                 </Typography>
               </CardContent>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => OndeleteCourse(course._id)}
+              >
+                Delete
+              </Button>
             </Card>
           </Grid>
         ))}

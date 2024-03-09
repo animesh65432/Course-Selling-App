@@ -26,7 +26,6 @@ const createthecourse = async (req, res) => {
 const Getthecourse = async (req, res) => {
   try {
     const courses = await coursemodel.find({});
-    console.log(courses);
     return res.status(200).json({ success: true, data: courses });
   } catch (error) {
     return res.status(400).json({
@@ -51,7 +50,7 @@ const EdittheCourse = async (req, res) => {
 };
 
 const Deletethecourse = async (req, res) => {
-  const { _id } = req.body;
+  const { _id } = req.query;
   console.log(_id);
 
   try {
