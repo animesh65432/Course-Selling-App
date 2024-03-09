@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { TextField, Button, Box } from "@mui/material";
 import { loginuser } from "../custom/loginuser";
+import { useDispatch } from "react-redux";
+import { addthetokens } from "../../store/authslice";
 
 const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const dispath = useDispatch();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -14,10 +17,11 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
-  const Onsubmithandler = (e) => {
+  const Onsubmithandler = async (e) => {
     e.preventDefault();
     if (name == "" && password == "") return alert("Please inputh the Data");
-    loginuser({ name: name, password: password });
+    let token = await loginuser({ name: name, password: password });
+    dispath(addthetokens(token));
   };
 
   return (
