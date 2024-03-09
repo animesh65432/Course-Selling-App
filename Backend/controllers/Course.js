@@ -37,8 +37,9 @@ const Getthecourse = async (req, res) => {
 };
 
 const EdittheCourse = async (req, res) => {
-  const { _id } = req.body;
+  const { _id } = req.query;
   console.log(_id);
+
   try {
     let response = await coursemodel.findByIdAndUpdate(_id, { ...req.body });
     return res
@@ -51,7 +52,6 @@ const EdittheCourse = async (req, res) => {
 
 const Deletethecourse = async (req, res) => {
   const { _id } = req.query;
-  console.log(_id);
 
   try {
     let response = await coursemodel.findByIdAndDelete(_id);

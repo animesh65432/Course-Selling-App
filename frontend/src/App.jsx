@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "./components/Header";
 import Singin from "./components/auth/Singin";
@@ -8,6 +8,7 @@ import CourseHeader from "./components/CourseHeader";
 import Course from "./components/course/Course";
 import AlltheCourses from "./components/course/AlltheCourses";
 import CreatCourse from "./components/course/CreatCourse";
+import UpDateCourse from "./components/course/Updatethecourse";
 
 const App = () => {
   const token = useSelector((state) => state.auth.token);
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/" element={<Course />} />
             <Route path="/Courses" element={<AlltheCourses />} />
             <Route path="/createcourse" element={<CreatCourse />}></Route>
+            <Route path="/Updatecourse/:id" element={<UpDateCourse />}></Route>
           </Routes>
         </>
       )}

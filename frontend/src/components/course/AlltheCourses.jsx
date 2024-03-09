@@ -11,10 +11,12 @@ import {
   Grid,
   Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const AlltheCourses = () => {
   const [courses, setCourses] = useState([]);
   const token = useSelector((state) => state.auth.token);
+  const Navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -32,6 +34,10 @@ const AlltheCourses = () => {
 
     fetchCourses();
   }, []);
+
+  const Ontoggoleupdate = (id) => {
+    Navigate(`/Updatecourse/${id}`);
+  };
 
   const OndeleteCourse = async (id) => {
     console.log(id);
@@ -87,6 +93,14 @@ const AlltheCourses = () => {
                   Price: {course.price}
                 </Typography>
               </CardContent>
+
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => Ontoggoleupdate(course._id)}
+              >
+                update
+              </Button>
               <Button
                 variant="contained"
                 color="error"
