@@ -6,7 +6,6 @@ const database = require("./database/db.js");
 const CourseRouter = require("./Router/Course.js");
 
 app.use(express.json());
-app.use(express.urlencoded());
 app.use(cors());
 app.use("/User", Router);
 app.use("/Course", CourseRouter);

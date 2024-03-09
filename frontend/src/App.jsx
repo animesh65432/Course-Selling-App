@@ -1,6 +1,12 @@
 import React from "react";
 
+import Singin from "./components/auth/Singin";
+
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <Singin />
+    </>
+  );
 };
 export default App;

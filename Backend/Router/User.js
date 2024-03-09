@@ -3,7 +3,7 @@ const {
   signupthefunction,
   loginthefunction,
 } = require("../controllers/user.js");
-const usermodel = require("../model/user.js");
+
 const Router = express.Router();
 
 Router.post("/", signupthefunction);
