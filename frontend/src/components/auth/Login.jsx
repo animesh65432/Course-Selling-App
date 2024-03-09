@@ -3,11 +3,13 @@ import { TextField, Button, Box } from "@mui/material";
 import { loginuser } from "../custom/loginuser";
 import { useDispatch } from "react-redux";
 import { addthetokens } from "../../store/authslice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const dispath = useDispatch();
+  const Navigate = useNavigate();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -22,6 +24,7 @@ const Login = () => {
     if (name == "" && password == "") return alert("Please inputh the Data");
     let token = await loginuser({ name: name, password: password });
     dispath(addthetokens(token));
+    Navigate("/");
   };
 
   return (

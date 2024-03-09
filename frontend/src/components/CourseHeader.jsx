@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { removetoken } from "../store/authslice";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CourseHeader = () => {
   const dispatch = useDispatch();
@@ -12,12 +12,15 @@ const CourseHeader = () => {
   };
 
   return (
-    <div style={{ marginBottom: "20px" }}>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button variant="contained" onClick={handleLogout}>
-          Logout
+    <div style={{ position: "absolute", top: "20px", right: "20px" }}>
+      <Link to="/createcourse">
+        <Button variant="contained" color="primary">
+          Create Course
         </Button>
-      </Box>
+      </Link>
+      <Button variant="contained" onClick={handleLogout} color="error">
+        Logout
+      </Button>
     </div>
   );
 };

@@ -19,25 +19,14 @@ const Verifythejwttokens = async (req, res, next) => {
       .json({ message: "Access denied. Token is missing." });
   }
 
+  const obj = jwttokens.verify(token, Secrect);
+  console.log(obj);
+
   try {
-    const decoded = jwttokens.verify(token, Secrect);
-    const user = await User.findOne({ _id: decoded._id });
-
-    if (!user) {
-      return res.status(401).json({ message: "Access denied. Invalid token." });
-    }
-
+    let response = await User.findOne(obj);
     next();
   } catch (error) {
-    if (error.name === "JsonWebTokenError") {
-      return res.status(401).json({ message: "Access denied. Invalid token." });
-    } else if (error.name === "TokenExpiredError") {
-      return res
-        .status(401)
-        .json({ message: "Access denied. Token has expired." });
-    } else {
-      return res.status(500).json({ message: "Internal server error" });
-    }
+    return res.status(404).json({ messege: "please sign in first" });
   }
 };
 
