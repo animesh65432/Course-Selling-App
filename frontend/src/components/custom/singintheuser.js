@@ -6,6 +6,6 @@ export const singintheuser = async (obj) => {
     console.log(response);
     alert("Sucefully Log In ");
   } catch (error) {
-    console.log(error);
+    console(error);
   }
 };
